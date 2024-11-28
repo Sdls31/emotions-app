@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box, Button, TextField, Typography } from '@mui/material';
 
 import { BackEndData } from 'components/DataGrid';
@@ -11,9 +12,11 @@ interface Props {
 
 const TextInput: React.FC<Props> = ({ setData, data }) => {
   const [emotionText, setEmotionText] = useState<string>('');
+  const [updatedText, setUpdatedText] = useState<boolean>(false);
 
   const updateData = () => {
     setData({ ...data, text: emotionText });
+    setUpdatedText(true);
   };
 
   return (
@@ -87,6 +90,7 @@ const TextInput: React.FC<Props> = ({ setData, data }) => {
           Update text
         </Typography>
       </Button>
+      <Box>{updatedText && <CheckCircleIcon />}</Box>
     </Box>
   );
 };
