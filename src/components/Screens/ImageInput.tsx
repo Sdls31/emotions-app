@@ -61,7 +61,9 @@ export const ImageInput: React.FC<Props> = ({ setData, data }) => {
         flexDirection: 'column',
         gap: 2
       }}>
-      <Typography fontSize={32}>Ingresa tu imagen</Typography>
+      <Typography fontSize={32} fontFamily={'ABeeZee'}>
+        Add an Image
+      </Typography>
       <Box
         sx={{
           display: 'flex',
@@ -77,12 +79,13 @@ export const ImageInput: React.FC<Props> = ({ setData, data }) => {
           <img src={emotionImage} style={{ width: '25rem', height: '15rem' }} />
         ) : (
           <Typography
+            fontFamily={'ABeeZee'}
             sx={{
               padding: '0.5rem',
               width: '25rem',
               wordWrap: 'break-word'
             }}>
-            Aquí aparecerá tu imagen
+            Your image will appear here
           </Typography>
         )}
       </Box>
@@ -108,7 +111,9 @@ export const ImageInput: React.FC<Props> = ({ setData, data }) => {
               color: 'black'
             }
           }}>
-          Upload files
+          <Typography fontFamily={'ABeeZee'} textTransform={'none'}>
+            Upload Files
+          </Typography>
           <VisuallyHiddenInput
             type="file"
             accept=".png, .jpg, .jpeg"
@@ -127,7 +132,9 @@ export const ImageInput: React.FC<Props> = ({ setData, data }) => {
               color: 'black'
             }
           }}>
-          Actualizar Imagen
+          <Typography fontFamily={'ABeeZee'} textTransform={'none'}>
+            Update image
+          </Typography>
         </Button>
       </Box>
     </Box>

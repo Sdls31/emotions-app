@@ -25,7 +25,9 @@ const TextInput: React.FC<Props> = ({ setData, data }) => {
         flexDirection: 'column',
         gap: 2
       }}>
-      <Typography fontSize={32}>Ingresa tu texto</Typography>
+      <Typography fontSize={32} fontFamily={'ABeeZee'}>
+        Add your phrase
+      </Typography>
       <Box
         sx={{
           display: 'flex',
@@ -40,6 +42,7 @@ const TextInput: React.FC<Props> = ({ setData, data }) => {
         }}>
         {emotionText ? (
           <Typography
+            fontFamily={'ABeeZee'}
             sx={{
               padding: '0.5rem',
               width: '25rem',
@@ -49,12 +52,13 @@ const TextInput: React.FC<Props> = ({ setData, data }) => {
           </Typography>
         ) : (
           <Typography
+            fontFamily={'ABeeZee'}
             sx={{
               padding: '0.5rem',
               width: '25rem',
               wordWrap: 'break-word'
             }}>
-            Aquí aparecerá tu texto
+            Your phrase will appear here
           </Typography>
         )}
       </Box>
@@ -79,7 +83,9 @@ const TextInput: React.FC<Props> = ({ setData, data }) => {
             color: 'black'
           }
         }}>
-        Actualizar Texto
+        <Typography fontFamily={'ABeeZee'} textTransform={'none'}>
+          Update text
+        </Typography>
       </Button>
     </Box>
   );

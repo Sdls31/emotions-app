@@ -1,5 +1,5 @@
 enum RoutesEnum {
   HOME = '/',
-  US = '/nosotros'
+  US = '/aboutus'
 }
 export default RoutesEnum;

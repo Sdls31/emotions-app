@@ -1,35 +1,48 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Box, Button, Grid, Typography } from '@mui/material';
 
 import { BackEndData } from 'components/DataGrid';
+import { Loader } from 'components/Loader/Loader';
 
 interface Props {
   data: BackEndData;
+}
+interface Response {
+  emocion_imagen: string;
+  emocion_texto: string;
+  recomendaciones: string;
 }
 
 export const PredictionInput: React.FC<Props> = ({ data }) => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [formattedText, setFormattedText] = useState<string>('');
+  const [advice, setAdvice] = useState<Response | null>(null);
 
-  const [advice, setAdvice] = useState<string>('');
   const fetchData = async () => {
     setLoading(true);
     try {
       const apiData = { texto: data.text, imagen: data.image };
-      console.log(apiData);
       const response = await axios.post(
         'http://127.0.0.1:5000/analizar',
         apiData
       );
       setAdvice(response.data);
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      setError('Error al obtener la predicción.');
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (advice?.recomendaciones) {
+      setFormattedText(advice.recomendaciones.replace(/\\n/g, '\n'));
+    }
+  }, [advice]);
 
   return (
     <Grid container spacing={2}>
@@ -44,11 +57,13 @@ export const PredictionInput: React.FC<Props> = ({ data }) => {
             gap: 2,
             borderRight: '1px solid black;'
           }}>
-          <Typography fontSize={32}>Datos para predecir</Typography>
-          <Typography>
-            Texto: {data.text ? data.text : 'Agrega una frase'}
+          <Typography fontSize={32} fontFamily={'ABeeZee'}>
+            Data to predict
           </Typography>
-          <Typography>Imagen: </Typography>
+          <Typography fontFamily={'ABeeZee'}>
+            Text: {data.text ? data.text : 'Add a phrase'}
+          </Typography>
+          <Typography fontFamily={'ABeeZee'}>Image:</Typography>
           <Box
             sx={{
               display: 'flex',
@@ -63,10 +78,11 @@ export const PredictionInput: React.FC<Props> = ({ data }) => {
             {data.urlImage ? (
               <img
                 src={data.urlImage}
+                alt="Imagen subida"
                 style={{ width: '17.5rem', height: '12.5rem' }}
               />
             ) : (
-              <Typography>Sube una imagen</Typography>
+              <Typography fontFamily={'ABeeZee'}>Upload an Image</Typography>
             )}
           </Box>
           <Box sx={{ display: 'flex' }}>
@@ -81,7 +97,9 @@ export const PredictionInput: React.FC<Props> = ({ data }) => {
                   color: 'black'
                 }
               }}>
-              Pedir predicción
+              <Typography fontFamily={'ABeeZee'} textTransform={'none'}>
+                Ask to Predict
+              </Typography>
             </Button>
           </Box>
         </Box>
@@ -96,7 +114,9 @@ export const PredictionInput: React.FC<Props> = ({ data }) => {
             flexDirection: 'column',
             gap: 2
           }}>
-          <Typography fontSize={32}>Consejos</Typography>
+          <Typography fontSize={32} fontFamily={'ABeeZee'}>
+            Advices
+          </Typography>
           <Box
             sx={{
               display: 'flex',
@@ -109,23 +129,35 @@ export const PredictionInput: React.FC<Props> = ({ data }) => {
               overflow: 'auto',
               boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)'
             }}>
-            {advice ? (
+            {loading ? (
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  height: '17.75rem'
+                }}>
+                <Loader />
+              </Box>
+            ) : advice?.recomendaciones ? (
               <Typography
+                fontFamily={'ABeeZee'}
                 sx={{
                   padding: '0.5rem',
                   width: '25rem',
+                  whiteSpace: 'pre-wrap',
                   wordWrap: 'break-word'
                 }}>
-                {advice}
+                {formattedText}
               </Typography>
             ) : (
               <Typography
+                fontFamily={'ABeeZee'}
                 sx={{
                   padding: '0.5rem',
                   width: '25rem',
                   wordWrap: 'break-word'
                 }}>
-                Es necesario subir una imagen y una frase
+                It is necessary to upload an image and a phrase
               </Typography>
             )}
           </Box>

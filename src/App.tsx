@@ -8,8 +8,9 @@ import Routes from 'components/Routes';
 const App = () => {
   return (
     <>
-      <NavBar />
       <BrowserRouter>
+        <NavBar />
+
         <Routes />
       </BrowserRouter>
     </>

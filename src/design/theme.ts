@@ -18,7 +18,6 @@ export const Colors = {
   neutral: '#B9B0AA',
   grey: '#E9E7E5'
 };
-
 const theme = createTheme({
   palette: {
     mode: 'light',
@@ -47,6 +46,13 @@ const theme = createTheme({
           fontFamily: 'Nunito'
         }
       }
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          fontFamily: '"ABeeZee", sans-serif' // Establece ABeeZee como fuente predeterminada
+        }
+      }
     }
   },
   typography: {
@@ -63,7 +69,8 @@ const theme = createTheme({
       'sans-serif',
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
+      '"Segoe UI Symbol"',
+      '"ABeeZee"'
     ].join(',')
   }
 });

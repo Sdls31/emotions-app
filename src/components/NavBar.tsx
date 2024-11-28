@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -14,9 +15,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-const pages = ['Captura', 'Equipo'];
+const pages = ['Capture', 'Team'];
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -25,12 +27,17 @@ const NavBar = () => {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleCloseNavMenu = (selectedPage: string) => {
+    if (selectedPage === 'Capture') {
+      navigate('/');
+    }
+    if (selectedPage === 'Team') {
+      navigate('/aboutus');
+    }
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ background: 'white', color: 'black' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -41,7 +48,7 @@ const NavBar = () => {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              fontFamily: 'ABeeZee',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -50,7 +57,12 @@ const NavBar = () => {
             Feelings
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'flex', md: 'none' },
+              color: 'black'
+            }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -76,8 +88,11 @@ const NavBar = () => {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}>
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
+                  <Typography
+                    sx={{ textAlign: 'center', fontFamily: 'ABeeZee' }}>
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -91,7 +106,7 @@ const NavBar = () => {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: 'ABeeZee',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -108,13 +123,19 @@ const NavBar = () => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}>
-                {page}
+                onClick={() => handleCloseNavMenu(page)}
+                sx={{
+                  my: 2,
+                  color: 'white',
+                  display: 'block',
+                  textTransform: 'none'
+                }}>
+                <Typography sx={{ fontFamily: 'ABeeZee', color: 'black' }}>
+                  {page}
+                </Typography>
               </Button>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}></Box>
         </Toolbar>
       </Container>
     </AppBar>

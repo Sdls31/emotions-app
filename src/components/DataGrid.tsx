@@ -56,13 +56,19 @@ export const DataGrid = () => {
             exclusive
             onChange={handleTypeCapture}>
             <ToggleButton value="text">
-              <Typography>Text</Typography>
+              <Typography fontFamily={'ABeeZee'} textTransform={'none'}>
+                Text
+              </Typography>
             </ToggleButton>
             <ToggleButton value="image">
-              <Typography>Image</Typography>
+              <Typography fontFamily={'ABeeZee'} textTransform={'none'}>
+                Image
+              </Typography>
             </ToggleButton>
             <ToggleButton value="prediction">
-              <Typography>Prediction</Typography>
+              <Typography fontFamily={'ABeeZee'} textTransform={'none'}>
+                Prediction
+              </Typography>
             </ToggleButton>
           </ToggleButtonGroup>
         </Box>
