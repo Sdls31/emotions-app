@@ -29,7 +29,6 @@ const InputGrid = () => {
       const reader = new FileReader();
       reader.onload = () => {
         if (reader.result) {
-          console.log(reader.result.toString());
           setImageBase64(reader.result.toString());
         }
       };
@@ -41,6 +40,7 @@ const InputGrid = () => {
       reader.readAsDataURL(files[0]);
     }
   };
+  const sendDatatoBackEnd = () => {};
 
   return (
     <Box
