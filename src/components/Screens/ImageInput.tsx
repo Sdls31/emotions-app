@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Box, Button, TextField, Typography, styled } from '@mui/material';
 
@@ -13,7 +14,7 @@ interface Props {
 export const ImageInput: React.FC<Props> = ({ setData, data }) => {
   const [emotionImage, setEmotionImage] = useState<string>('');
   const [imageBase64, setImageBase64] = useState<string>('');
-
+  const [updatedImage, setUpdatedImage] = useState<boolean>(false);
   const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
     clipPath: 'inset(50%)',
@@ -28,6 +29,7 @@ export const ImageInput: React.FC<Props> = ({ setData, data }) => {
 
   const handleUpdateObject = () => {
     setData({ ...data, image: imageBase64, urlImage: emotionImage });
+    setUpdatedImage(true);
   };
 
   const updateData = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,6 +139,7 @@ export const ImageInput: React.FC<Props> = ({ setData, data }) => {
           </Typography>
         </Button>
       </Box>
+      <Box>{updatedImage && <CheckCircleIcon />}</Box>
     </Box>
   );
 };

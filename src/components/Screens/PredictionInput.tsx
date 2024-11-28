@@ -161,8 +161,12 @@ export const PredictionInput: React.FC<Props> = ({ data }) => {
               </Typography>
             )}
           </Box>
-          <Typography>Text prediction: {advice?.emocion_texto}</Typography>
-          <Typography>Image prediction: {advice?.emocion_imagen}</Typography>
+          <Typography fontFamily={'ABeeZee'}>
+            Text prediction: {advice?.emocion_texto}
+          </Typography>
+          <Typography fontFamily={'ABeeZee'}>
+            Image prediction: {advice?.emocion_imagen}
+          </Typography>
         </Box>
       </Grid>
     </Grid>
